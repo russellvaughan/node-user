@@ -16,7 +16,7 @@ exports.localReg = function (username, password) {
   db.get('local-users', username)
   .then(function (result){ 
     console.log('username already exists');
-    deferred.resolve(false); 
+    deferred.resolve(false) 
 
   .fail(function (result) {
       console.log(result.body);

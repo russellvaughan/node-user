@@ -1,6 +1,9 @@
 {
  "name": "userAuth",
  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
  "dependencies": {
    "bcryptjs": "^0.7.12",
    "express": "^4.9.5",
