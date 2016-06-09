@@ -9,7 +9,7 @@ exports.localReg = function (username, password) {
   var user = {
     "username": username,
     "password": hash,
-    "avatar": "http://placepuppy.it/images/homepage/Beagle_puppy_6_weeks.JPG"
+    "avatar": "https://www.facebook.com/profile/pic.php?cuid=AYjoQdIzRAROT3K5NgsGSHjMDmppxqCxUNActRI14u5JB3YsFu6uqpMWg6QnLG-vxOrbd_BAU3jy8OOhU36-IERH6eqRucu9iWEYSBgWCANPa0BmkaiRBuIC_M8JSoZWCn_mKFYb5xDzPvzpkdl3EyHtcp75gGn8NFSt_KkFraSWiySQ8gtFs7xnEHhgKC2_5nmzJruN6J0rhn38eNgx377pwS2_zjDfS7ah471YNAncRbMSY2J-8xMh8pELIGLOb8o&square_px=64"
   }
  
   db.get('local-users', username)
