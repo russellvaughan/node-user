@@ -9,7 +9,19 @@ var express = require('express'),
     LocalStrategy = require('passport-local'),
     TwitterStrategy = require('passport-twitter'),
     GoogleStrategy = require('passport-google'),
-    FacebookStrategy = require('passport-facebook');
+    FacebookStrategy = require('passport-facebook'),
+    crypto = require('crypto');
+
+//===============GS SECURE MODE================
+
+var hmac = crypto.createHmac('sha256', '70ccf7c72278011666f04368c68e940f');
+hmac.update(user.username);
+var sig = hmac.digest('hex');
+console.log(sig));
+
+//==============================================
+
+
 
 
 var config = require('./config.js'), 

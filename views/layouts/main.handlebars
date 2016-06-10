@@ -4,21 +4,22 @@
 <head>
   <script>
   !function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
-  arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
+    arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
   d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
   insertBefore(d,q)}(window,document,'script','_gs');
 
   _gs('GSN-086224-W');
   _gs('event', 'Like');
-   _gs('identify', {
-     email: '{{user.username}}', 
-     custom: {
-       Heard_About: 'Facebook',
-       Type_Of_Guy: 'Great',
-       Colour_Hair: 'Brown'
-       },       
-  });
-</script>
+  _gs('identify', {
+   email: '{{user.username}}', 
+   custom: {
+     Heard_About: 'Facebook',
+     Type_Of_Guy: 'Great',
+     Colour_Hair: 'Brown'
+   },       
+   _gs('auth', '{{sig}}')
+ });
+  </script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,68 +30,68 @@
 
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="container">
+  <div class="container">
 
-      <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
 
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li>
               {{#if user}}
-                <p class="navbar-text">
-                  <strong>Hi,</strong>
-                  <img src="{{user.avatar}}" width="20" height="20">
-                  {{user.username}}
-                </p>
-                </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                    <a href="/logout">Log Out</a>
-                  </li>
-              {{else}}
-                <a href="/signin">Sign In</a>
-                </li>
-              {{/if}}
+              <p class="navbar-text">
+                <strong>Hi,</strong>
+                <img src="{{user.avatar}}" width="20" height="20">
+                {{user.username}}
+              </p>
+            </li>
           </ul>
-        </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/logout">Log Out</a>
+            </li>
+            {{else}}
+            <a href="/signin">Sign In</a>
+          </li>
+          {{/if}}
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    {{#if error}}
-      <p class="alert alert-warning">{{error}}</p>
-    {{/if}}
+  {{#if error}}
+  <p class="alert alert-warning">{{error}}</p>
+  {{/if}}
 
-    {{#if success}}
-      <p class="alert alert-success">{{success}}</p>
-    {{/if}}
+  {{#if success}}
+  <p class="alert alert-success">{{success}}</p>
+  {{/if}}
 
-    {{#if notice}}
-      <p class="alert alert-info">{{notice}}</p>
-    {{/if}}
+  {{#if notice}}
+  <p class="alert alert-info">{{notice}}</p>
+  {{/if}}
 
 
-    {{{body}}}
+  {{{body}}}
 
-    </div> 
+</div> 
 
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
