@@ -9,15 +9,15 @@
   insertBefore(d,q)}(window,document,'script','_gs');
 
   _gs('GSN-086224-W');
-  _gs('event', 'Like');
+  _gs('auth','{{@signature}}');
+  _gs('event','Like');
   _gs('identify', {
    email: '{{user.username}}', 
    custom: {
      Heard_About: 'Facebook',
      Type_Of_Guy: 'Great',
      Colour_Hair: 'Brown'
-   },       
-   _gs('auth', '{{@signature}}');
+   }        
  });
   </script>
   <meta charset="utf-8">
