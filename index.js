@@ -36,7 +36,7 @@ passport.use('local-signin', new LocalStrategy(
 
         //===============SECURE MODE================
 
-        var hmac = crypto.createHmac('sha256', '70ccf7c72278011666f04368c68e940f');
+        var hmac = crypto.createHmac('sha256', '4fd9ecd38ea20527ccf5be8ac120d588');
         hmac.update(user.username);
         signature = hmac.digest('hex');
         console.log('================')
