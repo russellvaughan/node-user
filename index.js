@@ -1,31 +1,19 @@
 var express = require('express'),
-    exphbs = require('express-handlebars'),
-    logger = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    session = require('express-session'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local'),
-    TwitterStrategy = require('passport-twitter'),
-    GoogleStrategy = require('passport-google'),
-    FacebookStrategy = require('passport-facebook'),
-    crypto = require('crypto');
-
-//===============GS SECURE MODE================
-
-var hmac = crypto.createHmac('sha256', '70ccf7c72278011666f04368c68e940f');
-hmac.update(user.username);
-var sig = hmac.digest('hex');
-console.log(sig));
-
-//==============================================
-
-
-
+exphbs = require('express-handlebars'),
+logger = require('morgan'),
+cookieParser = require('cookie-parser'),
+bodyParser = require('body-parser'),
+methodOverride = require('method-override'),
+session = require('express-session'),
+passport = require('passport'),
+LocalStrategy = require('passport-local'),
+TwitterStrategy = require('passport-twitter'),
+GoogleStrategy = require('passport-google'),
+FacebookStrategy = require('passport-facebook'),
+crypto = require('crypto');
 
 var config = require('./config.js'), 
-   funct = require('./functions.js'); 
+funct = require('./functions.js'); 
 var app = express();
 
 
@@ -45,6 +33,19 @@ passport.use('local-signin', new LocalStrategy(
     funct.localAuth(username, password)
     .then(function (user) {
       if (user) {
+
+        //===============SECURE MODE================
+
+        var hmac = crypto.createHmac('sha256', '70ccf7c72278011666f04368c68e940f');
+        hmac.update(user.username);
+        signature = hmac.digest('hex');
+        console.log('================')
+        console.log(signature)
+        console.log('================')
+        app.locals.data = {signature: signature};
+        
+        //===========================================
+
         console.log("LOGGED IN AS: " + user.username);
         req.session.success = 'You are successfully logged in ' + user.username + '!';
         done(null, user);
@@ -58,8 +59,11 @@ passport.use('local-signin', new LocalStrategy(
     .fail(function (err){
       console.log(err.body);
     });
+
   }
-));
+  ));
+
+ 
 
 passport.use('local-signup', new LocalStrategy(
   {usernameField: 'email', passReqToCallback : true}, 
@@ -67,6 +71,10 @@ passport.use('local-signup', new LocalStrategy(
     funct.localReg(username, password)
     .then(function (user) {
       if (user) {
+        var hmac = crypto.createHmac('sha256', '70ccf7c72278011666f04368c68e940f');
+        hmac.update(user.username);
+        signature = hmac.digest('hex');
+        app.locals.data = {signature: signature};
         console.log("REGISTERED: " + user.username);
         req.session.success = 'You are successfully registered and logged in ' + user.username + '!';
         done(null, user);
@@ -81,7 +89,7 @@ passport.use('local-signup', new LocalStrategy(
       console.log(err.body);
     });
   }
-));
+  ));
 
 //===============EXPRESS================
 
@@ -97,8 +105,8 @@ app.use(passport.session());
 
 app.use(function(req, res, next){
   var err = req.session.error,
-      msg = req.session.notice,
-      success = req.session.success;
+  msg = req.session.notice,
+  success = req.session.success;
 
   delete req.session.error;
   delete req.session.success;
@@ -113,7 +121,7 @@ app.use(function(req, res, next){
 
 
 var hbs = exphbs.create({
-    defaultLayout: 'main', 
+  defaultLayout: 'main', 
 });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -133,14 +141,14 @@ app.get('/signin', function(req, res){
 app.post('/local-reg', passport.authenticate('local-signup', {
   successRedirect: '/',
   failureRedirect: '/signin'
-  })
+})
 );
 
 
 app.post('/login', passport.authenticate('local-signin', {
   successRedirect: '/',
   failureRedirect: '/signin'
-  })
+})
 );
 
 

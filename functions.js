@@ -46,8 +46,6 @@ exports.localAuth = function (username, password) {
   .then(function (result){
     console.log("FOUND USER");
     var hash = result.body.password;
-    console.log(hash);
-    console.log(bcrypt.compareSync(password, hash));
     if (bcrypt.compareSync(password, hash)) {
       deferred.resolve(result.body);
     } else {
@@ -62,6 +60,5 @@ exports.localAuth = function (username, password) {
       deferred.reject(new Error(err));
     }
   });
-
   return deferred.promise;
 }
